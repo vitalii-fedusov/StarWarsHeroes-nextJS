@@ -31,3 +31,15 @@ body {
     text-wrap: balance;
   }
 }
+
+.selected>a {
+  border: 1px solid white;
+}
+
+.previous.disabled>a:hover {
+  cursor: no-drop;
+}
+
+.next.disabled>a:hover {
+  cursor: no-drop;
+}

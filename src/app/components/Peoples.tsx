@@ -4,6 +4,8 @@ import { useEffect, useState } from "react";
 import { Person } from "../types/Person";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
+import { Loader } from "./Loader";
+import HorizontalFlow from "./HorizontalFlow";
 
 export const Peoples = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
@@ -11,7 +13,7 @@ export const Peoples = () => {
   const [errorMessage, setErrorMessage] = useState("");
 
   const [page, setPage] = useState(1);
-  const itemsPerPage = 9;
+  const itemsPerPage = 3;
 
   const itemOffset = (page - 1) * itemsPerPage;
   const endOffset = itemOffset + itemsPerPage;
@@ -40,7 +42,7 @@ export const Peoples = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading</div>;
+    return <Loader />;
   }
 
   if (errorMessage) {
@@ -49,24 +51,26 @@ export const Peoples = () => {
 
   return (
     <>
-      <ul>
+      <HorizontalFlow />
+      <ul className="flex-col space-y-2 divide-y divide-dashed">
         {currentItems.map((person) => {
           return (
-            <li key={person.name}>
-              <h2>{person.name}</h2>
-              <p>{person.gender}</p>
+            <li key={person.name} className="py-4 flex-col space-y-2">
+              <h2>{`Character name: ${person.name}`}</h2>
+              <p>{`gender: ${person.gender}`}</p>
             </li>
           );
         })}
       </ul>
 
       <ReactPaginate
+        className="flex gap-x-4"
         breakLabel="..."
-        nextLabel=""
+        nextLabel=">"
         onPageChange={handlePageClick}
         pageRangeDisplayed={5}
         pageCount={pageCount}
-        previousLabel=""
+        previousLabel="<"
         renderOnZeroPageCount={null}
         forcePage={page - 1}
       />

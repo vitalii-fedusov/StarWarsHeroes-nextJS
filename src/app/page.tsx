@@ -1,5 +1,4 @@
 import { Peoples } from "./components/Peoples";
-import course from "./course.json";
 
 export default function Home() {
   return (
