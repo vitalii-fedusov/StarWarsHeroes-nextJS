@@ -5,7 +5,9 @@ import { Person } from "../types/Person";
 import ReactPaginate from "react-paginate";
 import axios from "axios";
 import { Loader } from "./Loader";
-import HorizontalFlow from "./HorizontalFlow";
+import CustomNode from "./CustomNode";
+import { ReactFlowProvider } from "reactflow";
+import { ExpandAndCollapse } from "./ExpandAndCollapse";
 
 export const Peoples = () => {
   const [peoples, setPeoples] = useState<Person[]>([]);
@@ -51,13 +53,21 @@ export const Peoples = () => {
 
   return (
     <>
-      <HorizontalFlow />
-      <ul className="flex-col space-y-2 divide-y divide-dashed">
+              {/* <ExpandAndCollapse /> */}
+
+      <ul className="flex space-y-2 divide-y divide-dashed">
         {currentItems.map((person) => {
           return (
             <li key={person.name} className="py-4 flex-col space-y-2">
+
+              {/* <ReactFlowProvider>
+                <CustomNode person={person} />
+              </ReactFlowProvider> */}
+
               <h2>{`Character name: ${person.name}`}</h2>
               <p>{`gender: ${person.gender}`}</p>
+              {/* <ExpandAndCollapse /> */}
+
             </li>
           );
         })}
